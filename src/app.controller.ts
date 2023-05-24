@@ -6,6 +6,7 @@ import { AuthRegisterDto } from './dto/authRegister.dto';
 import { AuthLoginDto } from './dto/authLogin.dto';
 import { PayloadDto } from './dto/payload.dto';
 import { productDto } from './dto/products.dto';
+import { getProductInfo } from './dto/getProductInfo.dto';
 import { Public } from './decorator/public.decorator';
 
 @Controller()
@@ -44,6 +45,21 @@ export class AppController {
   @Post('/products/create')
   createProduct(@Body() body: productDto, @Res() res: Response) {
     return this.appService.createProducts(body, res);
+  }
+
+  @Public()
+  @Post('/products/info')
+  getProductInfo(@Body() body: getProductInfo, @Res() res: Response) {
+    return this.appService.getProductInfo(body, res);
+  }
+
+  @Post('/order/info')
+  getOrderInfo(
+    @Payload() payload: PayloadDto,
+    @Body() body: productDto,
+    @Res() res: Response,
+  ) {
+    return this.appService.getOrderInfo(payload, body, res);
   }
 
   @Post('/order/create')

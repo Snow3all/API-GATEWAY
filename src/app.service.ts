@@ -5,6 +5,7 @@ import { AuthLoginDto } from './dto/authLogin.dto';
 import { PayloadDto } from './dto/payload.dto';
 import { Response } from 'express';
 import { productDto } from './dto/products.dto';
+import { getProductInfo } from './dto/getProductInfo.dto';
 
 @Injectable()
 export class AppService {
@@ -46,7 +47,6 @@ export class AppService {
 
   async getProfile(payload: PayloadDto, res: Response) {
     try {
-      console.log("payload: ", payload);
       const dataFormMicroservice = await this.http.axiosRef.post(
         `${process.env.USER_MODULE_URL}/profile`,
         { data: payload },
@@ -111,6 +111,23 @@ export class AppService {
     }
   }
 
+  async getProductInfo(body: getProductInfo, res: Response) {
+    try {
+      const dataFormMicroservice = await this.http.axiosRef.post(
+        `${process.env.PRODUCTS_MODULE_URL}/info`,
+        { data: body },
+      );
+      console.log('dataFormMicroservice: ', dataFormMicroservice.data);
+      return res.status(200).json({
+        data: dataFormMicroservice.data,
+      });
+    } catch (e) {
+      return res.status(500).json({
+        message: e,
+      });
+    }
+  }
+
   async createOrder(payload: PayloadDto, body: any, res: Response) {
     try {
       const dataFormMicroservice = await this.http.axiosRef.post(
@@ -137,6 +154,28 @@ export class AppService {
     try {
       const dataFormMicroservice = await this.http.axiosRef.post(
         `${process.env.ORDER_MODULE_URL}/cancel`,
+        {
+          data: {
+            payload: payload,
+            data: body,
+          },
+        },
+      );
+      console.log('dataFormMicroservice: ', dataFormMicroservice.data);
+      return res.status(200).json({
+        data: dataFormMicroservice.data,
+      });
+    } catch (e) {
+      return res.status(500).json({
+        message: e,
+      });
+    }
+  }
+
+  async getOrderInfo(payload: PayloadDto, body: any, res: Response) {
+    try {
+      const dataFormMicroservice = await this.http.axiosRef.post(
+        `${process.env.ORDER_MODULE_URL}/order`,
         {
           data: {
             payload: payload,
