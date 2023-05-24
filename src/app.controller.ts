@@ -30,6 +30,11 @@ export class AppController {
     return this.appService.getProfile(payload, res);
   }
 
+  @Post('/user/history')
+  getUserHistory(@Payload() payload: PayloadDto, @Res() res: Response) {
+    return this.appService.getUserHistory(payload, res);
+  }
+
   @Get('/user/orders')
   getUserOrders(@Payload() payload: PayloadDto, @Res() res: Response) {
     return this.appService.getUserOrders(payload, res);

@@ -61,6 +61,22 @@ export class AppService {
     }
   }
 
+  async getUserHistory(payload: PayloadDto, res: Response) {
+    try {
+      const dataFormMicroservice = await this.http.axiosRef.post(
+        `${process.env.USER_MODULE_URL}/orders`,
+        { data: payload },
+      );
+      return res.status(200).json({
+        data: dataFormMicroservice.data,
+      });
+    } catch (e) {
+      return res.status(500).json({
+        message: e,
+      });
+    }
+  }
+
   async getUserOrders(payload: PayloadDto, res: Response) {
     try {
       const dataFormMicroservice = await this.http.axiosRef.post(
