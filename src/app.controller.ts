@@ -1,22 +1,26 @@
-import { Controller, Get, Post, Body, Res, Req } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Body, Res } from '@nestjs/common';
 import { AppService } from './app.service';
-import { AuthRegister } from './dto/authRegister.dto';
-import { AuthLogin } from './dto/authLogin.dto';
-import { PayloadDto } from './dto/payload.dto';
 import { Response } from 'express';
 import { Payload } from './decorator/payload.decorator';
+import { AuthRegisterDto } from './dto/authRegister.dto';
+import { AuthLoginDto } from './dto/authLogin.dto';
+import { PayloadDto } from './dto/payload.dto';
+import { productDto } from './dto/products.dto';
+import { Public } from './decorator/public.decorator';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  @Public()
   @Post('/auth/register')
-  registerUser(@Body() body: AuthRegister, @Res() res: Response) {
+  registerUser(@Body() body: AuthRegisterDto, @Res() res: Response) {
     return this.appService.registerUser(body, res);
   }
 
+  @Public()
   @Post('/auth/login')
-  loginUser(@Body() body: AuthLogin, @Res() res: Response) {
+  loginUser(@Body() body: AuthLoginDto, @Res() res: Response) {
     return this.appService.loginUser(body, res);
   }
 
@@ -28,5 +32,35 @@ export class AppController {
   @Get('/user/orders')
   getUserOrders(@Payload() payload: PayloadDto, @Res() res: Response) {
     return this.appService.getUserOrders(payload, res);
+  }
+
+  @Public()
+  @Get('/products')
+  getAllProduct(@Res() res: Response) {
+    return this.appService.getAllProducts(res);
+  }
+
+  @Public()
+  @Post('/products/create')
+  createProduct(@Body() body: productDto, @Res() res: Response) {
+    return this.appService.createProducts(body, res);
+  }
+
+  @Post('/order/create')
+  createOrder(
+    @Payload() payload: PayloadDto,
+    @Body() body: productDto,
+    @Res() res: Response,
+  ) {
+    return this.appService.createOrder(payload, body, res);
+  }
+
+  @Delete('/order/cancel')
+  cancelOrder(
+    @Payload() payload: PayloadDto,
+    @Body() body: productDto,
+    @Res() res: Response,
+  ) {
+    return this.appService.cancelOrder(payload, body, res);
   }
 }

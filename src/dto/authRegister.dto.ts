@@ -1,4 +1,4 @@
-export class AuthRegister {
+export class AuthRegisterDto {
   username: string;
   password: string;
   confirmPassword: string;

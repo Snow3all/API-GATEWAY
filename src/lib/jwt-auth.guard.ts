@@ -6,21 +6,30 @@ import {
 import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
 import { PayloadDto } from 'src/dto/payload.dto';
-
+import { Observable } from 'rxjs';
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
   constructor(private reflector: Reflector) {
     super();
   }
 
-  handleRequest(
-    err: any,
-    payload: PayloadDto,
-    info: any,
+  public canActivate(
     context: ExecutionContext,
-    status?: any,
-  ): any {
-    if (err || !payload) throw err || new UnauthorizedException();
-    return payload;
+  ): boolean | Promise<boolean> | Observable<boolean> {
+    const isPublic = this.reflector.get<boolean>(
+      'isPublic',
+      context.getHandler(),
+    );
+
+    if (isPublic) {
+      return true;
+    }
+
+    return super.canActivate(context);
+
+  // handleRequest(err: any, payload: PayloadDto): any {
+  //   if (err || !payload) throw err || new UnauthorizedException();
+  //   return payload;
+  // }
   }
 }

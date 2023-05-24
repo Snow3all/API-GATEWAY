@@ -1,21 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { AuthRegister } from './dto/authRegister.dto';
-import { AuthLogin } from './dto/authLogin.dto';
+import { AuthRegisterDto } from './dto/authRegister.dto';
+import { AuthLoginDto } from './dto/authLogin.dto';
 import { PayloadDto } from './dto/payload.dto';
 import { Response } from 'express';
+import { productDto } from './dto/products.dto';
 
 @Injectable()
 export class AppService {
   constructor(private readonly http: HttpService) {}
 
-  async registerUser(body: AuthRegister, res: Response) {
+  async registerUser(body: AuthRegisterDto, res: Response) {
     try {
       const dataFormMicroservice = await this.http.axiosRef.post(
         `${process.env.AUTH_MODULE_URL}/register`,
         { data: body },
       );
-      console.log('dataFormMicroservice: ', dataFormMicroservice);
+      console.log('dataFormMicroservice: ', dataFormMicroservice.data);
       return res.status(200).json({
         data: dataFormMicroservice.data,
       });
@@ -26,13 +27,13 @@ export class AppService {
     }
   }
 
-  async loginUser(body: AuthLogin, res: Response) {
+  async loginUser(body: AuthLoginDto, res: Response) {
     try {
       const dataFormMicroservice = await this.http.axiosRef.post(
         `${process.env.AUTH_MODULE_URL}/login`,
         { data: body },
       );
-      console.log('dataFormMicroservice: ', dataFormMicroservice);
+      console.log('dataFormMicroservice: ', dataFormMicroservice.data);
       return res.status(200).json({
         data: dataFormMicroservice.data,
       });
@@ -45,11 +46,11 @@ export class AppService {
 
   async getProfile(payload: PayloadDto, res: Response) {
     try {
+      console.log("payload: ", payload);
       const dataFormMicroservice = await this.http.axiosRef.post(
         `${process.env.USER_MODULE_URL}/profile`,
         { data: payload },
       );
-      console.log('dataFormMicroservice: ', dataFormMicroservice);
       return res.status(200).json({
         data: dataFormMicroservice.data,
       });
@@ -62,12 +63,88 @@ export class AppService {
 
   async getUserOrders(payload: PayloadDto, res: Response) {
     try {
-      console.log('order');
       const dataFormMicroservice = await this.http.axiosRef.post(
         `${process.env.USER_MODULE_URL}/orders`,
         { data: payload },
       );
-      console.log('dataFormMicroservice: ', dataFormMicroservice);
+      console.log('dataFormMicroservice: ', dataFormMicroservice.data);
+      return res.status(200).json({
+        data: dataFormMicroservice.data,
+      });
+    } catch (e) {
+      return res.status(500).json({
+        message: e,
+      });
+    }
+  }
+
+  async createProducts(body: productDto, res: Response) {
+    try {
+      const dataFormMicroservice = await this.http.axiosRef.post(
+        `${process.env.PRODUCTS_MODULE_URL}/create`,
+        { data: body },
+      );
+      console.log('dataFormMicroservice: ', dataFormMicroservice.data);
+      return res.status(200).json({
+        data: dataFormMicroservice.data,
+      });
+    } catch (e) {
+      return res.status(500).json({
+        message: e,
+      });
+    }
+  }
+
+  async getAllProducts(res: Response) {
+    try {
+      const dataFormMicroservice = await this.http.axiosRef.get(
+        `${process.env.PRODUCTS_MODULE_URL}`,
+      );
+      console.log('dataFormMicroservice: ', dataFormMicroservice.data);
+      return res.status(200).json({
+        data: dataFormMicroservice.data,
+      });
+    } catch (e) {
+      return res.status(500).json({
+        message: e,
+      });
+    }
+  }
+
+  async createOrder(payload: PayloadDto, body: any, res: Response) {
+    try {
+      const dataFormMicroservice = await this.http.axiosRef.post(
+        `${process.env.ORDER_MODULE_URL}/create`,
+        {
+          data: {
+            payload: payload,
+            data: body,
+          },
+        },
+      );
+      console.log('dataFormMicroservice: ', dataFormMicroservice.data);
+      return res.status(200).json({
+        data: dataFormMicroservice.data,
+      });
+    } catch (e) {
+      return res.status(500).json({
+        message: e,
+      });
+    }
+  }
+
+  async cancelOrder(payload: PayloadDto, body: any, res: Response) {
+    try {
+      const dataFormMicroservice = await this.http.axiosRef.post(
+        `${process.env.ORDER_MODULE_URL}/cancel`,
+        {
+          data: {
+            payload: payload,
+            data: body,
+          },
+        },
+      );
+      console.log('dataFormMicroservice: ', dataFormMicroservice.data);
       return res.status(200).json({
         data: dataFormMicroservice.data,
       });
