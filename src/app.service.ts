@@ -17,7 +17,6 @@ export class AppService {
         `${process.env.AUTH_MODULE_URL}/register`,
         { data: body },
       );
-      console.log('dataFormMicroservice: ', dataFormMicroservice.data);
       return res.status(200).json({
         data: dataFormMicroservice.data,
       });
@@ -34,7 +33,6 @@ export class AppService {
         `${process.env.AUTH_MODULE_URL}/login`,
         { data: body },
       );
-      console.log('dataFormMicroservice: ', dataFormMicroservice.data);
       return res.status(200).json({
         data: dataFormMicroservice.data,
       });
@@ -83,7 +81,6 @@ export class AppService {
         `${process.env.USER_MODULE_URL}/orders`,
         { data: payload },
       );
-      console.log('dataFormMicroservice: ', dataFormMicroservice.data);
       return res.status(200).json({
         data: dataFormMicroservice.data,
       });
@@ -100,7 +97,6 @@ export class AppService {
         `${process.env.PRODUCTS_MODULE_URL}/create`,
         { data: body },
       );
-      console.log('dataFormMicroservice: ', dataFormMicroservice.data);
       return res.status(200).json({
         data: dataFormMicroservice.data,
       });
@@ -116,7 +112,6 @@ export class AppService {
       const dataFormMicroservice = await this.http.axiosRef.get(
         `${process.env.PRODUCTS_MODULE_URL}`,
       );
-      console.log('dataFormMicroservice: ', dataFormMicroservice.data);
       return res.status(200).json({
         data: dataFormMicroservice.data,
       });
@@ -133,7 +128,6 @@ export class AppService {
         `${process.env.PRODUCTS_MODULE_URL}/info`,
         { data: body },
       );
-      console.log('dataFormMicroservice: ', dataFormMicroservice.data);
       return res.status(200).json({
         data: dataFormMicroservice.data,
       });
@@ -155,7 +149,6 @@ export class AppService {
           },
         },
       );
-      console.log('dataFormMicroservice: ', dataFormMicroservice.data);
       return res.status(200).json({
         data: dataFormMicroservice.data,
       });
@@ -177,7 +170,6 @@ export class AppService {
           },
         },
       );
-      console.log('dataFormMicroservice: ', dataFormMicroservice.data);
       return res.status(200).json({
         data: dataFormMicroservice.data,
       });
@@ -199,7 +191,6 @@ export class AppService {
           },
         },
       );
-      console.log('dataFormMicroservice: ', dataFormMicroservice.data);
       return res.status(200).json({
         data: dataFormMicroservice.data,
       });
