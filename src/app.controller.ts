@@ -24,4 +24,9 @@ export class AppController {
   getProfile(@Payload() payload: PayloadDto, @Res() res: Response) {
     return this.appService.getProfile(payload, res);
   }
+
+  @Get('/user/orders')
+  getUserOrders(@Payload() payload: PayloadDto, @Res() res: Response) {
+    return this.appService.getUserOrders(payload, res);
+  }
 }

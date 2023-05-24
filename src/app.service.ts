@@ -59,4 +59,22 @@ export class AppService {
       });
     }
   }
+
+  async getUserOrders(payload: PayloadDto, res: Response) {
+    try {
+      console.log('order');
+      const dataFormMicroservice = await this.http.axiosRef.post(
+        `${process.env.USER_MODULE_URL}/orders`,
+        { data: payload },
+      );
+      console.log('dataFormMicroservice: ', dataFormMicroservice);
+      return res.status(200).json({
+        data: dataFormMicroservice.data,
+      });
+    } catch (e) {
+      return res.status(500).json({
+        message: e,
+      });
+    }
+  }
 }
