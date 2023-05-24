@@ -1,15 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { AuthLogin } from './dto/authRegister.dto';
+import { AuthRegister } from './dto/authRegister.dto';
 import { Response } from 'express';
 
 @Injectable()
 export class AppService {
   constructor(private readonly http: HttpService) {}
 
-  async registerUser(body: AuthLogin, res: Response) {
+  async registerUser(body: AuthRegister, res: Response) {
     try {
-      console.log('pass');
       const dataFormMicroservice = await this.http.axiosRef.post(
         `${process.env.AUTH_URL}/register`,
         { data: body },
