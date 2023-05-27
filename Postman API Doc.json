@@ -1,0 +1,342 @@
+{
+	"info": {
+		"_postman_id": "406eb068-ca3f-430b-bc8d-3d0d6a2c7e21",
+		"name": "Nest API Microservice routh",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20539118"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"john\",\n    \"password\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"john\",\n    \"password\": \"1234\",\n    \"confirmPassword\": \"1234\",\n    \"name\": \"John Doe\",\n    \"email\": \"mr.john@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Management",
+			"item": [
+				{
+					"name": "Get User Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDZkYTc1MDlmNDZhYjJhMDk2NTlkMzQiLCJ1c2VybmFtZSI6ImpvaG4iLCJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6Im1yLmpvaG5AZ21haWwuY29tIiwiaWF0IjoxNjg0OTI5MjQzLCJleHAiOjE2ODQ5NzI0NDN9.nX2uxnnn88qa2Ptlmwwf-JR_23ZJYWyahQMONSdD-6Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/user/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDZlMzQ1NzRhY2VhMmMwYzJjYTE4NGEiLCJ1c2VybmFtZSI6InNub3ciLCJuYW1lIjoiU25vdzNhbGwiLCJlbWFpbCI6InNub3dAZ21haWwuY29tIiwiaWF0IjoxNjg0OTQ0MDA5LCJleHAiOjE2ODQ5ODcyMDl9.4tQoxQRItG0D1VUkbv1fC_xmYS4casaH9Su11CFB1iw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/user/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Create Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDZlMTU1ZmZkM2Y2MmZkZjk3NmU3NzkiLCJ1c2VybmFtZSI6ImpvaG4iLCJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6Im1yLmpvaG5AZ21haWwuY29tIiwiaWF0IjoxNjg0OTM2MDM0LCJleHAiOjE2ODQ5NzkyMzR9.hGrrsq-Qalz-hTuTX4NYX0nyWx-C790-m86c-TMqt14",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productId\": \"646dfd5909e9eeb05d4e7d08\",\n    \"address\": \"191\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/order/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"order",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDZlMWQ0MmZkM2Y2MmZkZjk3NmU3N2YiLCJ1c2VybmFtZSI6ImpvaG4iLCJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6Im1yLmpvaG5AZ21haWwuY29tIiwiaWF0IjoxNjg0OTM4Mjc5LCJleHAiOjE2ODQ5ODE0Nzl9.zCw6pBKokuLbKRjzaBdByZXCoptzK5ET775iyeyD7Ds",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"orderId\": \"646e1f573c0bb6f5f59d92f8\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/order/cancel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"order",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDZlMWQ0MmZkM2Y2MmZkZjk3NmU3N2YiLCJ1c2VybmFtZSI6ImpvaG4iLCJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6Im1yLmpvaG5AZ21haWwuY29tIiwiaWF0IjoxNjg0OTM4Mjc5LCJleHAiOjE2ODQ5ODE0Nzl9.zCw6pBKokuLbKRjzaBdByZXCoptzK5ET775iyeyD7Ds",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"orderId\": \"646e1f583c0bb6f5f59d92fd\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/order/info",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"order",
+								"info"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Create New Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Samsung fold XX\",\n    \"details\": \"Android\",\n    \"price\": \"75,000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/products/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product info",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productId\": \"646dfd5909e9eeb05d4e7d08\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/products/info",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products",
+								"info"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
